@@ -1,0 +1,62 @@
+[project]
+name = "macanism"
+version = "0.1.0"
+description = "A project demonstrating macanism principles."
+authors = [
+    {name = "Alan Synn", email = "alan@alansynn.com"},
+]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "pydantic~=1.10.0", # Pydantic version 1
+]
+license = {text = "MIT"} # Or any other license
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    # flake8, mypy, black, isort etc.
+]
+docs = [
+    "sphinx>=7.0.0",
+    "furo>=2024.1.29",      # A clean, modern Sphinx theme
+    "sphinx-autoapi>=3.0.0", # For advanced API doc generation
+    "myst-parser>=2.0.0",  # To allow Markdown files in Sphinx
+    # napoleon is usually bundled with sphinx.ext.napoleon
+]
+
+[project.scripts]
+# macanism-cli = "macanism.cli:main" # Example if a CLI is added
+
+[build-system]
+requires = ["hatchling"] # A common build backend, uv can use it
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/macanism/__init__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "pytest",
+  "pytest-cov",
+]
+[tool.hatch.envs.default.scripts]
+cov = "pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=macanism --cov=tests"
+no-cov = "cov --no-cov"
+
+[tool.coverage.run]
+source = ["macanism"]
+omit = [
+    "src/macanism/__about__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "no cov",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "@(abc\\.)?abstractmethod",
+]
