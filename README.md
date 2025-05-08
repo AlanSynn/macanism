@@ -1,10 +1,12 @@
-# Macanism Project
+# Macanism
+
+> For those who are suffering about IK...
 
 ## Purpose and Overview
 
-This package is being developed to assist in designing macanisms involving linkages, cams, and gears. The goal is to provide robust tools for kinematic and dynamic analysis.
+This package is being developed to assist in designing mechanisms involving linkages, cams, and gears. The goal is to provide robust tools for kinematic and dynamic analysis.
 
-**For linkages:** The aim is to perform kinematic analysis by utilizing the degrees of freedom for the vectors that define the macanism. Through numerical solving and iteration, the position, velocity, and acceleration of these vectors and points can be determined.
+**For linkages:** The aim is to perform kinematic analysis by utilizing the degrees of freedom for the vectors that define the mechanism. Through numerical solving and iteration, the position, velocity, and acceleration of these vectors and points can be determined.
 
 **For cams:** The package intends to provide the ability to generate cam profile coordinates, plot SVAJ (displacement, velocity, acceleration, and jerk) diagrams, and create animations for cams with roller or flat-faced followers. These coordinates could be used for machining or imported into CAD software like SolidWorks. Users would specify the motion description (e.g., "rise 2 inches in 1 second, dwell for 1.5 seconds, fall 2 inches in 3 seconds"). Supported motion types will include uniform motion, harmonic motion, and cycloidal motion, with plans to introduce improved options like modified sinusoidal motion.
 
@@ -94,11 +96,11 @@ python src/macanism/main.py
 
 ## Tutorials
 
-To effectively use these tools, it is necessary to have some understanding of free body diagrams and vector loops that define a macanism.
-*(The following tutorials are from a related project and demonstrate concepts applicable to macanism design. Links may point to external content related to the original "macanism" project).*
+To effectively use these tools, it is necessary to have some understanding of free body diagrams and vector loops that define a mechanism.
+*(The following tutorials are from a related project and demonstrate concepts applicable to mechanism design. Links may point to external content related to the original "macanism" project).*
 
-*   **Introduction to Macanisms with Python:** [Watch Video](https://www.youtube.com/watch?v=kMmYv8u8824&list=PLghzFAspn1-eGjPOTT0D_6LXWqMBFRVIW) (Illustrates basic four-bar linkage concepts)
-*   **Advanced Macanisms with Python:** [Watch Video](https://www.youtube.com/watch?v=usY-oBifcM4&list=PLghzFAspn1-eGjPOTT0D_6LXWqMBFRVIW) (Covers more complex examples)
+*   **Introduction to mechanisms with Python:** [Watch Video](https://www.youtube.com/watch?v=kMmYv8u8824&list=PLghzFAspn1-eGjPOTT0D_6LXWqMBFRVIW) (Illustrates basic four-bar linkage concepts)
+*   **Advanced mechanisms with Python:** [Watch Video](https://www.youtube.com/watch?v=usY-oBifcM4&list=PLghzFAspn1-eGjPOTT0D_6LXWqMBFRVIW) (Covers more complex examples)
 
 ## Examples of Envisioned Capabilities
 
@@ -113,7 +115,7 @@ To use the macanism design tools, a basic knowledge of vector loops will be nece
 
 ![Four Bar Linkage Diagram](./images/fourbarlinkage.PNG)
 
-A four-bar linkage is a fundamental macanism. Its degrees of freedom (DOF) can be determined using Kutzbach's equation:
+A four-bar linkage is a fundamental mechanism. Its degrees of freedom (DOF) can be determined using Kutzbach's equation:
 `DOF = 3*(L-1) - 2*J1 - J2`, where L is the number of links, J1 is the number of full joints (revolute), and J2 is the number of half joints. For a typical four-bar linkage with 4 links and 4 full joints, DOF = 3(4-1) - 2(4) = 1. This means one input is needed to define the system's state.
 
 ![Four Bar Linkage Vector Loop](./images/fourbarlinkage_loop.PNG)
