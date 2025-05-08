@@ -1,11 +1,5 @@
 # Macanism Project
 
-[![PyPI version](https://badge.fury.io/py/macanism.svg)](https://badge.fury.io/py/macanism) <!-- Update once published -->
-[![Downloads](https://static.pepy.tech/badge/macanism)](https://pepy.tech/project/macanism) <!-- Update once published -->
-[![Downloads](https://static.pepy.tech/badge/macanism/month)](https://pepy.tech/project/macanism) <!-- Update once published -->
-
-A project demonstrating macanism principles, designed by Alan Synn.
-
 ## Purpose and Overview
 
 This package is being developed to assist in designing macanisms involving linkages, cams, and gears. The goal is to provide robust tools for kinematic and dynamic analysis.
@@ -117,21 +111,21 @@ To use the macanism design tools, a basic knowledge of vector loops will be nece
 
 #### Four Bar Linkage Example
 
-![Four Bar Linkage Diagram](https://raw.githubusercontent.com/alansynn/macanism/master/images/fourbarlinkage.PNG) <!-- Update image path -->
+![Four Bar Linkage Diagram](./images/fourbarlinkage.PNG)
 
 A four-bar linkage is a fundamental macanism. Its degrees of freedom (DOF) can be determined using Kutzbach's equation:
 `DOF = 3*(L-1) - 2*J1 - J2`, where L is the number of links, J1 is the number of full joints (revolute), and J2 is the number of half joints. For a typical four-bar linkage with 4 links and 4 full joints, DOF = 3(4-1) - 2(4) = 1. This means one input is needed to define the system's state.
 
-![Four Bar Linkage Vector Loop](https://raw.githubusercontent.com/alansynn/macanism/master/images/fourbarlinkage_loop.PNG) <!-- Update image path -->
+![Four Bar Linkage Vector Loop](./images/fourbarlinkage_loop.PNG)
 
 **Problem Statement:**
 Consider a four-bar linkage with link lengths a=5", b=8", c=8" (ground), and d=9". Crank 'a' rotates at 500 RPM. Animate the linkage and plot angle, angular velocity, and angular acceleration of vector 'd'.
 
 **Expected Output (Conceptual):**
 Animation:
-![Four Bar Linkage Animation](https://raw.githubusercontent.com/alansynn/macanism/master/images/fourbar_animation.gif) <!-- Update image path -->
+![Four Bar Linkage Animation](./images/fourbar_animation.gif)
 Plots:
-![Four Bar Linkage Analysis Plots](https://raw.githubusercontent.com/alansynn/macanism/master/images/analysis_d.png) <!-- Update image path -->
+![Four Bar Linkage Analysis Plots](./images/analysis_d.png)
 
 
 ### Cams
@@ -187,14 +181,14 @@ import matplotlib.pyplot as plt
 
 **Expected Output (Conceptual):**
 SVAJ Diagram:
-![SVAJ Diagram](https://raw.githubusercontent.com/alansynn/macanism/master/images/svaj.png) <!-- Update image path -->
+![SVAJ Diagram](./images/svaj.png)
 Roller Follower Profile:
-![Roller Follower Cam Profile](https://raw.githubusercontent.com/alansynn/macanism/master/images/roller_profile.png) <!-- Update image path -->
+![Roller Follower Cam Profile](./images/roller_profile.png)
 Flat Follower Profile:
-![Flat Follower Cam Profile](https://raw.githubusercontent.com/alansynn/macanism/master/images/flat_profile.png) <!-- Update image path -->
+![Flat Follower Cam Profile](./images/flat_profile.png)
 Animations (GIFs):
-![Cam with Roller Follower Animation](https://raw.githubusercontent.com/alansynn/macanism/master/images/cam_roller.gif) <!-- Update image path -->
-![Cam with Flat Follower Animation](https://raw.githubusercontent.com/alansynn/macanism/master/images/cam_flat.gif) <!-- Update image path -->
+![Cam with Roller Follower Animation](./images/cam_roller.gif)
+![Cam with Flat Follower Animation](./images/cam_flat.gif)
 
 ### Gears
 
@@ -226,7 +220,7 @@ import matplotlib.pyplot as plt
 
 **Expected Output (Conceptual):**
 Gear Profile:
-![Spur Gear Profile](https://raw.githubusercontent.com/alansynn/macanism/master/images/gear60.PNG) <!-- Update image path -->
+![Spur Gear Profile](./images/gear60.PNG)
 Properties Table (example):
 | Property                 | Value    |
 |--------------------------|----------|
