@@ -1,4 +1,5 @@
 import json
+import os # Added for directory creation
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch
@@ -924,6 +925,72 @@ class macanism:
 
     def __getitem__(self, item):
         return self.dic[item]
+
+    def save_paths(self, directory, base_filename, mechanism_name="mechanism", variation_name="default", format="csv"):
+        """
+        Saves the calculated paths of all joints to a file after iterate() has been called.
+
+        :param directory: str; The directory where path files will be saved.
+        :param base_filename: str; A user-defined base for the filename.
+        :param mechanism_name: str; An optional name for the type of mechanism (e.g., "FourBar").
+        :param variation_name: str; An optional name for the specific variation (e.g., "link_length_5").
+        :param format: str; The desired output format ("csv", "json", "npy").
+        """
+        if not self.joints or self.joints[0].x_positions is None:
+            raise RuntimeError("The iterate() method must be called before saving paths to populate joint data.")
+
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
+        # Sanitize mechanism_name and variation_name for filename
+        safe_mechanism_name = "".join(c if c.isalnum() or c in ('_', '-') else '_' for c in mechanism_name)
+        safe_variation_name = "".join(c if c.isalnum() or c in ('_', '-') else '_' for c in variation_name)
+
+        filename_parts = [base_filename]
+        if safe_mechanism_name and safe_mechanism_name.lower() != "mechanism":
+            filename_parts.append(safe_mechanism_name)
+        if safe_variation_name and safe_variation_name.lower() != "default":
+            filename_parts.append(safe_variation_name)
+
+        full_filename_base = os.path.join(directory, "_".join(filename_parts))
+
+        if format.lower() == "csv":
+            full_filename = f"{full_filename_base}.csv"
+            header = ['joint_name', 'step_index', 'x', 'y']
+            data_list = [header]
+            for joint in self.joints:
+                if joint.x_positions is not None and joint.y_positions is not None:
+                    for i in range(len(joint.x_positions)):
+                        data_list.append([joint.name, i, joint.x_positions[i], joint.y_positions[i]])
+            # Use the existing Data class for CSV writing, but pass data directly
+            # The Data class expects the matrix without headers if headers are passed separately.
+            csv_data_obj = Data([row for row in data_list[1:]], headers=header) # Pass data without header, header separately
+            csv_data_obj.write_to_csv(full_filename)
+            print(f"Saved paths to {full_filename}")
+
+        elif format.lower() == "json":
+            full_filename = f"{full_filename_base}.json"
+            paths_data = {}
+            for joint in self.joints:
+                if joint.x_positions is not None and joint.y_positions is not None:
+                    paths_data[joint.name] = list(zip(joint.x_positions.tolist(), joint.y_positions.tolist()))
+            with open(full_filename, 'w') as f:
+                json.dump(paths_data, f, indent=4)
+            print(f"Saved paths to {full_filename}")
+
+        elif format.lower() == "npy":
+            full_filename = f"{full_filename_base}.npz" # Use .npz for multiple arrays
+            paths_data_dict = {}
+            for joint in self.joints:
+                if joint.x_positions is not None and joint.y_positions is not None:
+                    # Store as a structured array or just separate x and y if preferred
+                    # Here, storing as N_steps x 2 array [x, y]
+                    paths_data_dict[joint.name] = np.array(list(zip(joint.x_positions, joint.y_positions)))
+            np.savez(full_filename, **paths_data_dict)
+            print(f"Saved paths to {full_filename}")
+
+        else:
+            raise ValueError(f"Unsupported format: {format}. Supported formats are 'csv', 'json', 'npy'.")
 
 
 def get_joints(names):

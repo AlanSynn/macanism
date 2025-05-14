@@ -1,19 +1,27 @@
 [project]
 name = "macanism"
 version = "0.1.0"
-description = "A project demonstrating macanism principles."
+description = "A mechanism design and analysis tool."
 authors = [
     {name = "Alan Synn", email = "alan@alansynn.com"},
 ]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "pydantic~=1.10.0", # Pydantic version 1
+    "pydantic>=2.0", # Updated to Pydantic v2
+    "numpy>=1.20",
+    "scipy>=1.7",
+    "matplotlib>=3.5",
+    "streamlit>=1.0", # Assuming streamlit is used, add as dependency
+    "streamlit-drawable-canvas>=0.9.0", # For path drawing
+    "scikit-learn>=0.24", # For PCA
+    "Pillow>=9.0", # Added Pillow for image handling
 ]
 license = {text = "MIT"} # Or any other license
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
+    "watchdog>=6.0.0",
     "pytest>=7.0",
     "pytest-cov>=4.0",
     # flake8, mypy, black, isort etc.

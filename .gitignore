@@ -136,4 +136,6 @@ dist
 project
 venv
 
+.clinerules/
+
 scratch*
